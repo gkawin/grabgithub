@@ -15,7 +15,6 @@
   "author": "Kawin Glomjai <g.kawin@live.com>",
   "license": "",
   "dependencies": {
-    "boron": "^0.1.2",
     "browserify": "^10.2.6",
     "gulp": "^3.9.0",
     "gulp-streamify": "^1.0.0",
