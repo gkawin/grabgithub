@@ -1,0 +1,39 @@
+@import "define.styl"
+html
+    >body
+        light_gray();
+        min-width: 230px
+    
+.fixed-container
+    margin: 0 auto;
+    max-width: 768px;
+  
+.img_avatar
+    width: 140px
+    height: 140px
+    
+.img_avatar_follower
+    width: 32px
+    height: 32px
+
+ul
+    &.showRepos
+        list-style: none
+    >li
+        &.list-followers
+            cursor: pointer
+        &.reposList
+            list-style: none
+            padding: 5px
+            color: #337ab7
+            font-size: 16px
+            text-decoration: underline
+
+div
+    &.clear
+        clear()
+    &.user-detail
+        padding-top: 30px
+
+
+        

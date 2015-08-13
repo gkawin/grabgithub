@@ -1,0 +1,29 @@
+{
+  "name": "GrabGithub",
+  "version": "1.0.6",
+  "description": "Taskworld code challenge",
+  "main": "server.js",
+  "repository": "https://github.com/gkawin/grabgithub.git",
+  "keywords": [
+    "react",
+    "reactjs",
+    "server",
+    "server-side"
+  ],
+  "author": "Kawin Glomjai <g.kawin@live.com>",
+  "license": "",
+  "dependencies": {
+    "browserify": "^10.2.6",
+    "gulp": "^3.9.0",
+    "gulp-streamify": "^1.0.0",
+    "gulp-stylus": "^2.0.6",
+    "gulp-uglify": "^1.2.0",
+    "handlebars": "^3.0.3",
+    "hapi": "~8.8.1",
+    "literalify": "^0.4.0",
+    "node-jsx": "^0.13.3",
+    "react": "^0.13.3",
+    "reactify": "^1.1.1",
+    "vinyl-source-stream": "^1.1.0"
+  }
+}
