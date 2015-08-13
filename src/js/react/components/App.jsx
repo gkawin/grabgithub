@@ -1,4 +1,9 @@
 var React = require("react");
+var GithubUserForm = require('./githubForm.jsx');
+var Showprofile = require('./showProfile.jsx');
+var ShowRepos = require('./showRepository.jsx');
+var ShowFollowers = require("./showFollowers.jsx");
+
 var service_endpoint = {
     url : 'https://api.github.com',
     rootpath: '/users/',
@@ -8,12 +13,7 @@ var service_endpoint = {
     }
 };
 
-var GithubUserForm = require('./githubForm.jsx');
-var Showprofile = require('./showProfile.jsx');
-var ShowRepos = require('./showRepository.jsx');
-var ShowFollowers = require("./showFollowers.jsx");
 
-////////////////////////// ALL FILE /////////////////////////////////////////
 var App = React.createClass({
     /**
      * set initlize state.
@@ -23,19 +23,17 @@ var App = React.createClass({
         return {
             userData : [],
             followersData : [],
-            reposData : [],
-            reposPerPage: 10
+            reposData : []
         };
     },
     
     /**
-     * get Github posonal's details.
+     * get Github personal's details.
      * @param {string} username
      * @returns {undefined}
      */
     findUser : function(username){
-        console.log("call find user");
-        var url = service_endpoint.url+'/users/'+username
+        var url = service_endpoint.url+'/users/'+username;
         var request = this._callAjax(url);
         
         //success handle
@@ -44,8 +42,7 @@ var App = React.createClass({
                 userData : response
             });
             
-            //pagination repository
-            this.findRepository(username,1);
+            this.findRepository(username);
             this.findFollowers(username);
         }.bind(this));
         
@@ -57,17 +54,13 @@ var App = React.createClass({
     },
     
     /**
-     * 
+     * get Github repository list.
      * @param {type} username
      * @returns {undefined}
      */
-    findRepository : function(username,page){
-        console.log("call findRepository : "+page);
-        var url = service_endpoint.url+'/users/'+username+'/repos'
-        var request = this._callAjax(url,{
-            'page':page,
-            'per_page':this.state.reposPerPage
-        });
+    findRepository : function(username){
+        var url = service_endpoint.url+'/users/'+username+'/repos';
+        var request = this._callAjax(url);
         
         //success handle
         request.success(function(response){
@@ -77,17 +70,16 @@ var App = React.createClass({
         }.bind(this));
         
         //Error handle.
-        request.fail(function(xhr,response){console.log("view repositiory exceeds.")}.bind(this));
+        request.fail(function(xhr,response){console.error("view repositiory exceeds.")}.bind(this));
     },
     
     /**
-     * 
+     * get Github followers list.
      * @param {type} username
      * @returns {undefined}
      */
     findFollowers : function(username){
-        console.log("call findFollowers");
-        var url = service_endpoint.url+'/users/'+username.toString().trim()+'/followers'
+        var url = service_endpoint.url+'/users/'+username+'/followers'
         var request = this._callAjax(url);
         
         //success handle
@@ -99,10 +91,11 @@ var App = React.createClass({
         }.bind(this));
         
         //Error handle.
-        request.fail(function(xhr,response){console.log("view followes exceeds.")}.bind(this));
+        request.fail(function(xhr,response){console.error("view followes exceeds.")}.bind(this));
     },
+    
     /**
-     * 
+     * call API gihub service by GET method.
      * @param {type} username
      * @returns {jqXHR|Boolean}
      */
@@ -133,12 +126,13 @@ var App = React.createClass({
      * @returns {undefined}
      */
     render : function(){
-        console.log(this.state.userData.length);
         if(this.state.userData.length <= 0)
         {
             return (
-                <GithubUserForm 
-                    findUser={this.findUser}/>
+                <div>
+                    <GithubUserForm 
+                        findUser={this.findUser} />
+                </div>
                 );
         }else
         {
@@ -146,28 +140,28 @@ var App = React.createClass({
                 <div>
                     <GithubUserForm 
                         findUser={this.findUser}/>
-                    
-                    <div className="thumbnail">
-                        <Showprofile 
-                            avatar_url={this.state.userData.avatar_url} 
-                            login={this.state.userData.login} 
-                            bio={this.state.userData.bio}  />  
-                        <div className="row user-detail">    
-                            <div className="col-sm-2"> </div>
-                            <div className="col-sm-5">
-                            <ShowRepos 
-                                reposData={this.state.reposData}
-                                userData={this.state.userData}
-                                findRepository={this.findRepository}/>
+                        
+                        <div className="panel">
+                            <div className="panel-body">
+                                    <Showprofile 
+                                        avatar_url={this.state.userData.avatar_url} 
+                                        login={this.state.userData.login} 
+                                        bio={this.state.userData.bio}  />  
+                                <div className="row user-detail">
+                                    <div className="col-sm-2"></div>
+                                    <div className="col-sm-5">
+                                        <ShowFollowers 
+                                            followersData={this.state.followersData}
+                                            findUser={this.findUser} />
+                                    </div>
+                                    <div className="col-sm-5">
+                                        <ShowRepos 
+                                            reposData={this.state.reposData}/>
+                                    </div>
+                                </div>
                             </div>
-                            <div className="col-sm-5">
-                            <ShowFollowers 
-                                followersData={this.state.followersData}
-                                findUser={this.findUser}/>
-                            </div>
-                        </div>    
-                    </div>
-                </div>    
+                        </div>
+                </div>   
             );
         }
     }

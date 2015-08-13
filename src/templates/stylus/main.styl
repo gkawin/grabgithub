@@ -1,39 +1,78 @@
 @import "define.styl"
-html
-    >body
-        light_gray();
-        min-width: 230px
-    
-.fixed-container
-    margin: 0 auto;
-    max-width: 768px;
-  
-.img_avatar
-    width: 140px
-    height: 140px
-    
-.img_avatar_follower
-    width: 32px
-    height: 32px
 
+/*
+* BODY
+*/
+defaultElements()
+.content-header
+    padding-bottom 5px
+    margin-bottom 10px
+
+/*
+* MEDIA
+*/
+.user-profile 
+    > .media
+       padding-left 20px
+       > .media-body
+            padding-left 40px
+            
 ul
     &.showRepos
-        list-style: none
-    >li
-        &.list-followers
-            cursor: pointer
-        &.reposList
-            list-style: none
-            padding: 5px
-            color: #337ab7
-            font-size: 16px
-            text-decoration: underline
+        list-style none
 
-div
-    &.clear
-        clear()
-    &.user-detail
-        padding-top: 30px
+            
+/*
+* PANEL
+*/
+.panel
+    box-shadow 0 2px 0 rgba(0,0,0,0.05)
+    border 0
+    > .panel-heading:after,
+    &.panel-color > .panel-heading:after
+        content ''
+        display block
+        position absolute
+        height 0
+        left 20px
+        right 20px
+        border-bottom 1px solid rgba(0,0,0,0.1)
+            
+.panel-heading
+    position relative
+    height 50px
+    padding 0
+    
+.panel-title
+    font-weight 300
+    padding 0 20px
+    line-height 50px
+    white-space nowrap
+    overflow hidden
+    text-overflow ellipsis
+
+.panel-body
+    padding 25px 20px
+    
+.panel-footer
+    background-color #ecf0f1
+    color #515151
+    border-color #eaedf0
+    position relative
+
+.panel-control
+    height 100%
+    position relative
+    float right
+    padding 0 15px
 
 
-        
+/*
+* OPTIONAL: BOOTSTRAP
+*/
+.container
+    padding-top 30px
+
+
+.btn-lg
+    padding 10px 60px

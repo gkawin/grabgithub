@@ -1,8 +1,22 @@
-clear(clearstyle = both){
-    clear: clearstyle
-}
+defaultElements()
+    html,body
+        min-width 290px
+    
+    body
+        background-color #f0f3f3
+        font-size 14px
+        text-rendering optimizeLegibility
+        -webkit-font-smoothing antialiased !important
+    
+    form
+        padding-bottom 20px
+        
+box-shadow(args...)
+    -webkit-box-shadow args
+    -moz-box-shadow args
+    box-shadow args
 
-light_gray(){
-    background-color: #eee
-}
-
+text-overflow(args...)
+    text-overflow args
+    -ms-text-overflow args
+    -o-text-overflow args

@@ -3,9 +3,7 @@ var React = require("react");
 var ShowProfileImg = React.createClass({
     render : function(){
         return (
-            <div className="col-sm-3">
-                <img className="img_avatar" alt="140x140" src={this.props.avatar_url} data-holder-rendered="true"/>
-            </div>
+            <img className="media-object" alt="128x128" src={this.props.avatar_url} data-holder-rendered="true" width="128"  />
         );
     }
 });
@@ -14,16 +12,17 @@ var ShowProfileImg = React.createClass({
 var ShowProfileInfo = React.createClass({
     render : function(){
         return (
-            <div className="row user-profile">    
-                <ShowProfileImg avatar_url={this.props.avatar_url} />
-                <div className="col-sm-9">
-                    <div className="caption">
-                        <div className="media-body">
-                            <h1>{this.props.login}</h1>
-                            <p>{this.props.bio}</p>
-                        </div>
+            <div className="row user-profile">
+                <div className="media">
+                    <div className="media-left media-top">
+                        <ShowProfileImg avatar_url={this.props.avatar_url} />
                     </div>
-                </div>   
+                    <div className="media-body">
+                        <h1 className="media-heading">{this.props.login}</h1>
+                        <h4>Bio:</h4>
+                        <p>{this.props.bio}</p>
+                    </div>
+                </div>
             </div>
         );
     }

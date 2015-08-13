@@ -1,11 +1,6 @@
 var React = require("react");
 
 var GithubUserForm = React.createClass({
-    getInitialState : function(){
-        return ({
-            text : ''
-        });
-    },
     handleSubmit: function(event){
        event.preventDefault();
        var userInput = React.findDOMNode(this.refs.username);
@@ -17,23 +12,25 @@ var GithubUserForm = React.createClass({
        userInput = '';
    },
    render: function(){
-       var value =this.state.text;
           return (
-                <div id="form_hookuser" className="jumbotron">
-                    <form onSubmit={this.handleSubmit}>
-                        <div className="input-group input-group-lg">
-                            <span className="input-group-btn">
-                                <button className="btn btn-default" type="submit">OK!</button>
-                            </span>
-                            <input 
-                                type="text" 
-                                name="username" 
-                                ref="username" 
-                                className="form-control" 
-                                placeholder="Search for..."/>
+                <form onSubmit={this.handleSubmit}>
+                    <div className="row">
+                        <div className="col-sm-12 col-md-12">
+                            <div className="form-group">
+                                <div className="col-sm-10">
+                                    <input 
+                                        ref="username" 
+                                        className="form-control input-lg" 
+                                        placeholder="Input github username"/>
+                                </div>
+                                <div className="col-sm-2">
+                                    <button className="btn btn-success btn-lg">OK!</button>
+                                </div>
+                            </div>
                         </div>
-                    </form>
-                </div>
+                    </div>
+                </form>
+       
            )
    }
 });
