@@ -9,7 +9,7 @@ var GithubUserForm = React.createClass({
     
     getInitialState : function(){
         return {
-            userInput : ''
+            userInput : 'sdfsdfsdfsdfs'
         };
     },
     handleSubmit: function(event){
