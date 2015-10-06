@@ -1,20 +1,16 @@
 var React = require("react");
+var Reflux = require("reflux");
+
 var GithubUserForm = require('./githubForm.jsx');
 var Showprofile = require('./showProfile.jsx');
 var ShowRepos = require('./showRepository.jsx');
 var ShowFollowers = require("./showFollowers.jsx");
 
-var service_endpoint = {
-    url : 'https://api.github.com',
-    rootpath: '/users/',
-    auth : {
-        client_id : '22d429fcbac9d428c6be',
-        client_secret : '686ce23e6b051b653647243e82f74be7eea9f0ef'
-    }
-};
+var grabgitStore = require("../stores/grabgitStore");
 
 
 var App = React.createClass({
+    mixins : [Reflux.connect(grabgitStore)],
     /**
      * set initlize state.
      * @returns {AppAnonym$4.getInitialState.AppAnonym$5}
@@ -27,31 +23,7 @@ var App = React.createClass({
         };
     },
     
-    /**
-     * get Github personal's details.
-     * @param {string} username
-     * @returns {undefined}
-     */
-    findUser : function(username){
-        var url = service_endpoint.url+'/users/'+username;
-        var request = this._callAjax(url);
-        
-        //success handle
-        request.success(function(response){
-            this.setState({
-                userData : response
-            });
-            
-            this.findRepository(username);
-            this.findFollowers(username);
-        }.bind(this));
-        
-        //Error handle.
-        request.fail(function(xhr,response){
-            alert('no data found');
-            return false;
-        }.bind(this));
-    },
+    
     
     /**
      * get Github repository list.
@@ -126,12 +98,13 @@ var App = React.createClass({
      * @returns {undefined}
      */
     render : function(){
+        console.log(this.state)
         if(this.state.userData.length <= 0)
         {
             return (
                 <div>
                     <GithubUserForm 
-                        findUser={this.findUser} />
+                        fetchUser={this.fetchUser} />
                 </div>
                 );
         }else

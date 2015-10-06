@@ -1,17 +1,24 @@
 var React = require("react");
+var Reflux = require("reflux");
+var grabgitStore = require("../stores/grabgitStore");
 
 var GithubUserForm = React.createClass({
+    mixins: [
+        Reflux.connect(grabgitStore)
+    ],
+    
+    getInitialState : function(){
+        return {
+            userInput : ''
+        };
+    },
     handleSubmit: function(event){
        event.preventDefault();
-       var userInput = React.findDOMNode(this.refs.username);
-       if (userInput.value == ''){
-           alert("Please input github username");
-           return false;
-       }
-       this.props.findUser(userInput.value);
-       userInput = '';
+       console.log(grabgitStore);
+       grabgitStore.Store.fetchUser(React.findDOMNode(this.refs.username));
    },
    render: function(){
+       console.log(this.state)
           return (
                 <form onSubmit={this.handleSubmit}>
                     <div className="row">

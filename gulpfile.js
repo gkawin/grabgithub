@@ -14,7 +14,7 @@ gulp.task('js', function() {
         .transform(reactify)
         .bundle()
         .pipe(source('bundle.js'))
-        .pipe(streamify(uglify()))
+        //.pipe(streamify(uglify()))
         .pipe(gulp.dest('./public/js/'));
 });
 
