@@ -1,7 +1,7 @@
-var React = require("react");
+var React = require("react")
 
 var FollowerList  = React.createClass({
-    render : function(){
+    render : function (){
         return (<li className="media list-followers" onClick={this.props.onClick}>
                     <a href="#">
                         <div className="media-left  media-middle">
@@ -11,30 +11,30 @@ var FollowerList  = React.createClass({
                             <h4>{this.props.items.login}</h4>
                         </div>
                     </a>
-                </li>);
+                </li>)
     }
-});
+})
 
 var ShowFollowers = React.createClass({
-    handleClickUser : function(username){
-        this.props.findUser(username);
+    handleClickUser : function (username){
+        this.props.findUser(username)
     },
-    render : function(){
+    render : function (){
         return (
 
                 <div className="caption">
                     <h2>Followers:</h2>
                     <ul className="media-list">
-                    {this.props.followersData.map(function(result,idx){
+                    {this.props.followersData.map(function (result,idx){
                         return (<FollowerList 
                             key={idx}
                             items={result}
-                            onClick={this.handleClickUser.bind(null,result.login)}/>);
+                            onClick={this.handleClickUser.bind(null,result.login)}/>)
                     }.bind(this))}
                     </ul>
                 </div>
-        );
+        )
     }
-});
+})
 
-module.exports = ShowFollowers;
+module.exports = ShowFollowers

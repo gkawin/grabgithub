@@ -1,3 +1,3 @@
-module.exports.getIndex = function(request, reply) {
-    reply.view('index');
+module.exports.getIndex = function (request, reply) {
+    reply.view('index')
 }

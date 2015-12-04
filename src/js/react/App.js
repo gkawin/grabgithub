@@ -1,8 +1,8 @@
-var React = require('react');
-var App = require("./components/App.jsx");
+var React = require('react')
+var App = require("./components/App.jsx")
 
 var Root = React.createClass({
-    render : function(){
+    render : function (){
         return (
             <div className="container">
                 <div className="row">
@@ -11,8 +11,8 @@ var Root = React.createClass({
                     </div>
                 </div>
            </div>
-        );
+        )
     }
-});
+})
 
-React.render(<Root />, document.getElementById('content'));
+React.render(<Root />, document.getElementById('content'))

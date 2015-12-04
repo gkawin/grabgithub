@@ -1,16 +1,16 @@
-var React = require("react");
+var React = require("react")
 
 var ShowProfileImg = React.createClass({
-    render : function(){
+    render : function (){
         return (
             <img className="media-object" alt="128x128" src={this.props.avatar_url} data-holder-rendered="true" width="128"  />
-        );
+        )
     }
-});
+})
 
 
 var ShowProfileInfo = React.createClass({
-    render : function(){
+    render : function (){
         return (
             <div className="row user-profile">
                 <div className="media">
@@ -24,8 +24,8 @@ var ShowProfileInfo = React.createClass({
                     </div>
                 </div>
             </div>
-        );
+        )
     }
-});
+})
 
-module.exports = ShowProfileInfo;
+module.exports = ShowProfileInfo

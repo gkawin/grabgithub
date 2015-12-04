@@ -1,11 +1,11 @@
 
-import name from "module-name";
 
-var React = require('react');
-var GithubUserForm = require('./githubForm.jsx');
-var Showprofile = require('./showProfile.jsx');
-var ShowRepos = require('./showRepository.jsx');
-var ShowFollowers = require("./showFollowers.jsx");
+
+var React = require('react')
+var GithubUserForm = require('./githubForm.jsx')
+var Showprofile = require('./showProfile.jsx')
+var ShowRepos = require('./showRepository.jsx')
+var ShowFollowers = require('./showFollowers.jsx')
 
 var service_endpoint = {
     url : 'https://api.github.com',
@@ -14,7 +14,7 @@ var service_endpoint = {
         client_id : '22d429fcbac9d428c6be',
         client_secret : '686ce23e6b051b653647243e82f74be7eea9f0ef'
     }
-};
+}
 
 
 var App = React.createClass({
@@ -22,12 +22,12 @@ var App = React.createClass({
      * set initlize state.
      * @returns {AppAnonym$4.getInitialState.AppAnonym$5}
      */
-    getInitialState: function() {
+    getInitialState () {
         return {
             userData : [],
             followersData : [],
             reposData : []
-        };
+        }
     },
 
     /**
@@ -35,25 +35,25 @@ var App = React.createClass({
      * @param {string} username
      * @returns {undefined}
      */
-    findUser : function(username){
-        var url = service_endpoint.url+'/users/'+username;
-        var request = this._callAjax(url);
+    findUser (username) {
+        var url = service_endpoint.url+'/users/'+username
+        var request = this._callAjax(url)
 
         //success handle
-        request.success(function(response){
+        request.success(function (response){
             this.setState({
                 userData : response
-            });
+            })
 
-            this.findRepository(username);
-            this.findFollowers(username);
-        }.bind(this));
+            this.findRepository(username)
+            this.findFollowers(username)
+        }.bind(this))
 
         //Error handle.
-        request.fail(function(xhr,response){
-            alert('no data found');
-            return false;
-        }.bind(this));
+        request.fail(function (xhr,response){
+            alert('no data found')
+            return false
+        }.bind(this))
     },
 
     /**
@@ -61,19 +61,19 @@ var App = React.createClass({
      * @param {type} username
      * @returns {undefined}
      */
-    findRepository : function(username){
-        var url = service_endpoint.url+'/users/'+username+'/repos';
-        var request = this._callAjax(url);
+    findRepository : function (username) {
+        var url = service_endpoint.url+'/users/'+username+'/repos'
+        var request = this._callAjax(url)
 
         //success handle
-        request.success(function(response){
+        request.success(function (response) {
             this.setState({
                 reposData :response
-            });
-        }.bind(this));
+            })
+        }.bind(this))
 
         //Error handle.
-        request.fail(function(xhr,response){console.error("view repositiory exceeds.")}.bind(this));
+        request.fail(function (xhr,response){console.error('view repositiory exceeds.')}.bind(this))
     },
 
     /**
@@ -81,20 +81,20 @@ var App = React.createClass({
      * @param {type} username
      * @returns {undefined}
      */
-    findFollowers : function(username){
+    findFollowers : function (username){
         var url = service_endpoint.url+'/users/'+username+'/followers'
-        var request = this._callAjax(url);
+        var request = this._callAjax(url)
 
         //success handle
-        request.success(function(response){
+        request.success(function (response){
             this.setState({
                 followersData : response
-            });
+            })
 
-        }.bind(this));
+        }.bind(this))
 
         //Error handle.
-        request.fail(function(xhr,response){console.error("view followes exceeds.")}.bind(this));
+        request.fail(function (xhr,response){console.error('view followes exceeds.')}.bind(this))
     },
 
     /**
@@ -102,15 +102,15 @@ var App = React.createClass({
      * @param {type} username
      * @returns {jqXHR|Boolean}
      */
-    _callAjax : function(url,data){
+    _callAjax : function (url,data){
         if(url === '' || typeof url === 'undefined' )
         {
-            alert('please fill some input.');
-            return false;
+            alert('please fill some input.')
+            return false
         }
         if(typeof data ==='undefined')
         {
-            data = {};
+            data = {}
         }
 
         //Oauth for extends limit access.
@@ -119,16 +119,16 @@ var App = React.createClass({
                 url : url,
                 dataType : 'json',
                 data : data_params
-            });
+            })
 
-        return request;
+        return request
     },
 
     /**
      * render data.
      * @returns {undefined}
      */
-    render : function(){
+    render : function (){
         if(this.state.userData.length <= 0)
         {
             return (
@@ -136,7 +136,7 @@ var App = React.createClass({
                     <GithubUserForm
                         findUser={this.findUser} />
                 </div>
-                );
+                )
         }else
         {
             return (
@@ -144,20 +144,20 @@ var App = React.createClass({
                     <GithubUserForm
                         findUser={this.findUser}/>
 
-                        <div className="panel">
-                            <div className="panel-body">
+                        <div className='panel'>
+                            <div className='panel-body'>
                                     <Showprofile
                                         avatar_url={this.state.userData.avatar_url}
                                         login={this.state.userData.login}
                                         bio={this.state.userData.bio}  />
-                                <div className="row user-detail">
-                                    <div className="col-sm-2"></div>
-                                    <div className="col-sm-5">
+                                <div className='row user-detail'>
+                                    <div className='col-sm-2'></div>
+                                    <div className='col-sm-5'>
                                         <ShowFollowers
                                             followersData={this.state.followersData}
                                             findUser={this.findUser} />
                                     </div>
-                                    <div className="col-sm-5">
+                                    <div className='col-sm-5'>
                                         <ShowRepos
                                             reposData={this.state.reposData}/>
                                     </div>
@@ -165,10 +165,10 @@ var App = React.createClass({
                             </div>
                         </div>
                 </div>
-            );
+            )
         }
     }
-});
+})
 
 
-module.exports = App;
+module.exports = App

@@ -1,7 +1,7 @@
-var hapi = require("hapi");
-var Path = require('path');
-var Handlebars = require("handlebars");
-var Routes = require("./src/routes");
+var hapi = require("hapi")
+var Path = require('path')
+var Handlebars = require("handlebars")
+var Routes = require("./src/routes")
 
 //connection setting.
 var connection = {
@@ -18,10 +18,10 @@ var server = new hapi.Server({
       }
     }
   }
-});
+})
 
 //addd connection
-server.connection(connection);
+server.connection(connection)
 //setting view and template engine.
 server.views({
   engines: {
@@ -29,11 +29,11 @@ server.views({
   },
   relativeTo: __dirname,
   path: Path.join(__dirname, './src/templates'),
-});
+})
 
 //setting routes.
 for (var idx in Routes) {
-  server.route(Routes[idx]);
+  server.route(Routes[idx])
 }
 
-server.start();
+server.start()

@@ -1,17 +1,17 @@
-var React = require("react");
+var React = require("react")
 
 var GithubUserForm = React.createClass({
-    handleSubmit: function(event){
-       event.preventDefault();
-       var userInput = React.findDOMNode(this.refs.username);
+    handleSubmit: function (event){
+       event.preventDefault()
+       var userInput = React.findDOMNode(this.refs.username)
        if (userInput.value == ''){
-           alert("Please input github username");
-           return false;
+           alert("Please input github username")
+           return false
        }
-       this.props.findUser(userInput.value);
-       userInput = '';
+       this.props.findUser(userInput.value)
+       userInput = ''
    },
-   render: function(){
+   render: function (){
           return (
                 <form onSubmit={this.handleSubmit}>
                     <div className="row">
@@ -33,6 +33,6 @@ var GithubUserForm = React.createClass({
        
            )
    }
-});
+})
 
-module.exports = GithubUserForm;
+module.exports = GithubUserForm
