@@ -1,4 +1,7 @@
-var React = require("react");
+
+import name from "module-name";
+
+var React = require('react');
 var GithubUserForm = require('./githubForm.jsx');
 var Showprofile = require('./showProfile.jsx');
 var ShowRepos = require('./showRepository.jsx');
@@ -26,7 +29,7 @@ var App = React.createClass({
             reposData : []
         };
     },
-    
+
     /**
      * get Github personal's details.
      * @param {string} username
@@ -35,24 +38,24 @@ var App = React.createClass({
     findUser : function(username){
         var url = service_endpoint.url+'/users/'+username;
         var request = this._callAjax(url);
-        
+
         //success handle
         request.success(function(response){
             this.setState({
                 userData : response
             });
-            
+
             this.findRepository(username);
             this.findFollowers(username);
         }.bind(this));
-        
+
         //Error handle.
         request.fail(function(xhr,response){
             alert('no data found');
             return false;
         }.bind(this));
     },
-    
+
     /**
      * get Github repository list.
      * @param {type} username
@@ -61,18 +64,18 @@ var App = React.createClass({
     findRepository : function(username){
         var url = service_endpoint.url+'/users/'+username+'/repos';
         var request = this._callAjax(url);
-        
+
         //success handle
         request.success(function(response){
             this.setState({
                 reposData :response
             });
         }.bind(this));
-        
+
         //Error handle.
         request.fail(function(xhr,response){console.error("view repositiory exceeds.")}.bind(this));
     },
-    
+
     /**
      * get Github followers list.
      * @param {type} username
@@ -81,19 +84,19 @@ var App = React.createClass({
     findFollowers : function(username){
         var url = service_endpoint.url+'/users/'+username+'/followers'
         var request = this._callAjax(url);
-        
+
         //success handle
         request.success(function(response){
             this.setState({
                 followersData : response
             });
-      
+
         }.bind(this));
-        
+
         //Error handle.
         request.fail(function(xhr,response){console.error("view followes exceeds.")}.bind(this));
     },
-    
+
     /**
      * call API gihub service by GET method.
      * @param {type} username
@@ -109,7 +112,7 @@ var App = React.createClass({
         {
             data = {};
         }
-        
+
         //Oauth for extends limit access.
         var data_params = $.extend({},data,service_endpoint.auth)
         var request = $.ajax({
@@ -117,10 +120,10 @@ var App = React.createClass({
                 dataType : 'json',
                 data : data_params
             });
-            
+
         return request;
     },
-    
+
     /**
      * render data.
      * @returns {undefined}
@@ -130,7 +133,7 @@ var App = React.createClass({
         {
             return (
                 <div>
-                    <GithubUserForm 
+                    <GithubUserForm
                         findUser={this.findUser} />
                 </div>
                 );
@@ -138,30 +141,30 @@ var App = React.createClass({
         {
             return (
                 <div>
-                    <GithubUserForm 
+                    <GithubUserForm
                         findUser={this.findUser}/>
-                        
+
                         <div className="panel">
                             <div className="panel-body">
-                                    <Showprofile 
-                                        avatar_url={this.state.userData.avatar_url} 
-                                        login={this.state.userData.login} 
-                                        bio={this.state.userData.bio}  />  
+                                    <Showprofile
+                                        avatar_url={this.state.userData.avatar_url}
+                                        login={this.state.userData.login}
+                                        bio={this.state.userData.bio}  />
                                 <div className="row user-detail">
                                     <div className="col-sm-2"></div>
                                     <div className="col-sm-5">
-                                        <ShowFollowers 
+                                        <ShowFollowers
                                             followersData={this.state.followersData}
                                             findUser={this.findUser} />
                                     </div>
                                     <div className="col-sm-5">
-                                        <ShowRepos 
+                                        <ShowRepos
                                             reposData={this.state.reposData}/>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                </div>   
+                </div>
             );
         }
     }

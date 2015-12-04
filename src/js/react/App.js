@@ -7,7 +7,7 @@ var Root = React.createClass({
             <div className="container">
                 <div className="row">
                     <div className="col-sm-12 col-md-12">
-                        <App />                    
+                        <App />
                     </div>
                 </div>
            </div>
