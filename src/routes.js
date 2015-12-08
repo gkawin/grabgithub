@@ -1,4 +1,4 @@
-var func = require("./modules")
+var func = require('./modules')
 
 module.exports = [ {
     method: 'GET',

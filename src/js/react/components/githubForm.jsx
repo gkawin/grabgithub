@@ -1,11 +1,11 @@
-var React = require("react")
+var React = require('react')
 
 var GithubUserForm = React.createClass({
     handleSubmit: function (event){
        event.preventDefault()
        var userInput = React.findDOMNode(this.refs.username)
        if (userInput.value == ''){
-           alert("Please input github username")
+           alert('Please input github username')
            return false
        }
        this.props.findUser(userInput.value)
@@ -14,17 +14,17 @@ var GithubUserForm = React.createClass({
    render: function (){
           return (
                 <form onSubmit={this.handleSubmit}>
-                    <div className="row">
-                        <div className="col-sm-12 col-md-12">
-                            <div className="form-group">
-                                <div className="col-sm-10">
+                    <div className='row'>
+                        <div className='col-sm-12 col-md-12'>
+                            <div className='form-group'>
+                                <div className='col-sm-10'>
                                     <input 
-                                        ref="username" 
-                                        className="form-control input-lg" 
-                                        placeholder="Input github username"/>
+                                        ref='username' 
+                                        className='form-control input-lg' 
+                                        placeholder='Input github username'/>
                                 </div>
-                                <div className="col-sm-2">
-                                    <button className="btn btn-success btn-lg">OK!</button>
+                                <div className='col-sm-2'>
+                                    <button className='btn btn-success btn-lg'>OK!</button>
                                 </div>
                             </div>
                         </div>

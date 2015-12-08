@@ -1,29 +1,32 @@
 
-var gulp = require('gulp')
-var streamify = require('gulp-streamify')
-var uglify = require('gulp-uglify')
-var browserify = require('browserify')
-var reactify = require('reactify')
-var source = require('vinyl-source-stream')
+const gulp    = require('gulp')
+const concat  = require('gulp-concat')
+const stylus  = require('gulp-stylus')
+const batch   = require('gulp-batch')
+const watch   = require('gulp-watch')
 
-var stylus = require('gulp-stylus')
+const Webpack = require('webpack')
+const WebpackDevServer = require('webpack-dev-server')
 
-gulp.task('js', function () {
-  browserify('./src/js/react/App.js')
-    .transform(reactify)
-    .bundle()
-    .pipe(source('bundle.js'))
-    .pipe(streamify(uglify()))
-    .pipe(gulp.dest('./build/js'))
+const webpackConfig = require('./webpack.conf.js')
+
+gulp.task('default', ['webpack-dev-server'])
+
+gulp.task('build-dev', ['webpack:build-dev'], function () {
+	gulp.watch(['src/**/*'], ['webpack:build-dev'])
 })
 
-gulp.task('css', function () {
-  gulp.src('./src/templates/stylus/main.styl')
-    .pipe(stylus({ compress: true }))
-    .pipe(gulp.dest('./build/css/'))
-})
+// modify some webpack config options
+var myDevConfig = Object.create(webpackConfig)
+myDevConfig.devtool = 'sourcemap'
+myDevConfig.debug = true
 
-gulp.task('default', ['js','css'], function () {
-  gulp.watch(['./src/js/**/*'], ['js'])
-  gulp.watch(['./src/templates/stylus/*'], ['css'])
+// create a single instance of the compiler to allow caching
+var devCompiler = Webpack(myDevConfig)
+
+gulp.task('webpack:build-dev', function (callback) {
+	// run webpack
+	devCompiler.run(function (err, stats) {
+		callback()
+	})
 })

@@ -1,6 +1,4 @@
 
-
-
 var React = require('react')
 var GithubUserForm = require('./githubForm.jsx')
 var Showprofile = require('./showProfile.jsx')
@@ -8,14 +6,13 @@ var ShowRepos = require('./showRepository.jsx')
 var ShowFollowers = require('./showFollowers.jsx')
 
 var service_endpoint = {
-    url : 'https://api.github.com',
-    rootpath: '/users/',
-    auth : {
-        client_id : '22d429fcbac9d428c6be',
-        client_secret : '686ce23e6b051b653647243e82f74be7eea9f0ef'
-    }
+  url : 'https://api.github.com',
+  rootpath: '/users/',
+  auth : {
+      client_id : '22d429fcbac9d428c6be',
+      client_secret : '686ce23e6b051b653647243e82f74be7eea9f0ef'
+  }
 }
-
 
 var App = React.createClass({
     /**
